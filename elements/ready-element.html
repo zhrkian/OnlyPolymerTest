@@ -1,0 +1,38 @@
+<polymer-element name="ready-element" attributes="owner testObject" on-click="{{makeCoolest}}">
+    <template>
+        <shadow></shadow>
+        <br>
+        <paper-input label="Type something" value="Prefilled value"></paper-input>
+
+        This element has a ready() method.
+        <span id="el">Not ready...</span>
+        <br>
+        <label for="ageInput">Age:</label>
+        <input id="ageInput" type="range"
+               value="{{age}}">
+    </template>
+    <script>
+        Polymer('ready-element', {
+            owner: "Daniel",
+            age : 10,
+            testObject : {
+                p1 : 'Vasya'
+            },
+            ready: function() {
+                this.$.el.textContent = this.owner +
+                        " is ready! " + this.testObject.p1;
+                this.age = 100;
+            },
+            ageChanged : function(){
+                if (this.age){
+                    this.$.el.textContent = this.owner +
+                            " is ready! " + this.testObject.p1 + "   " + this.age;
+                }
+            },
+            makeCoolest: function() {
+                console.log('On my element click');
+                this.super();
+            }
+        });
+    </script>
+</polymer-element>
